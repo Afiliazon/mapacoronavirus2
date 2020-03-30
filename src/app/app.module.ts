@@ -41,7 +41,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     RouterModule,
     PerfectScrollbarModule,
     ModalModule.forRoot(),
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production, scope: './', registrationStrategy: 'registerImmediately' }),
+    ServiceWorkerModule.register('./ngsw-worker.js', { enabled: environment.production, registrationStrategy: 'registerImmediately' }),
   ],
   providers:[{
     provide: PERFECT_SCROLLBAR_CONFIG,

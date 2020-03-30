@@ -1,7 +1,7 @@
 {
   "redis": {
-    "host": "host",
-    "password": "1234"
+    "host": "https://mapacoronavirus.live",
+    "password": "12347"
   },
   "keys": {
     "all": "coronastatistics:all",
