@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <h2 class="text-center mt-3 mb-3" *ngIf="country">
     <img 
-    width="100px" src="assets/flags/{{countryCodes[country.country].toLowerCase()}}.svg" alt="{{country.country}}"> Estadísticas de {{country.country}}</h2>
+    width="100px" src="assets/flags/{{countryCodes[country.country].toLowerCase()}}.svg" alt="{{country.country}}">{{country.country}}  {{'sta' | translate}}</h2>
   <div class="row">
     <div class="col-xl-3 col-md-6 col-6">
       <div class="card-box">

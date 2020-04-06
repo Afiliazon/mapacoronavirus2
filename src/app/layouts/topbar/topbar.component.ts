@@ -1,12 +1,22 @@
 import { Component, HostListener } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-topbar',
   templateUrl: './topbar.component.html',
   styleUrls: ['./topbar.component.scss']
 })
 export class TopbarComponent {
-  constructor() { }
+  constructor(
+    public translate: TranslateService
+  ) {
+    translate.addLangs(['es', 'en']);
+    translate.setDefaultLang('es');
+  }
 
+  switchLang(lang: string) {
+    this.translate.use(lang);
+  }
+   
   deferredPrompt: any;
   showButton = false;
   @HostListener('window:beforeinstallprompt', ['$event'])
