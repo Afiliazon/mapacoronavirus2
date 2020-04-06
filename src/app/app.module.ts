@@ -64,13 +64,12 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     dismiss: 'Acepto',
     deny: 'Quiero salir',
     cookiePolicyLink: 'Politica de Cookies',
-    cookiePolicyHref: 'https://cookie.com',
+    cookiePolicyHref: 'https://afiliazon.com/politica-de-cookies/',
 
     privacyPolicyLink: 'Privacidad',
-    privacyPolicyHref: 'https://privacy.com',
+    privacyPolicyHref: 'https://privacy.https://afiliazon.com/politica-de-privacidad/',
 
-    tosLink: 'Terms of Service',
-    tosHref: 'https://tos.com',
+    
   }
   };
 
