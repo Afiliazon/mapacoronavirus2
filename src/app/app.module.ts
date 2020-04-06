@@ -23,6 +23,7 @@ import { CountupComponent } from './shared/countup/countup.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { AdsenseModule } from 'ng2-adsense';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   };
@@ -50,7 +51,11 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         useFactory: httpTranslateLoader,
         deps: [HttpClient]
       }
-    })
+    }),
+    // shown passing global defaults (optional)
+    AdsenseModule.forRoot({
+      adClient: 'ca-pub-9611770290034128'
+    }),
   ],
   providers:[{
     provide: PERFECT_SCROLLBAR_CONFIG,
