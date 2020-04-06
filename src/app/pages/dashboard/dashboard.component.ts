@@ -61,7 +61,7 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
   public modalStep = 1;
   showModal(): void {
     this.modalStep = 1;
-    this.isModalShown = true;
+    this.isModalShown = false;
   
   }
  
