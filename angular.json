@@ -31,9 +31,12 @@
             "styles": [
               "src/assets/scss/bootstrap.scss",
               "src/assets/scss/app.scss",
-              "src/assets/scss/icons.scss"
+              "src/assets/scss/icons.scss",
+              "node_modules/cookieconsent/build/cookieconsent.min.css"
             ],
-            "scripts": [],
+            "scripts": [
+              "node_modules/cookieconsent/build/cookieconsent.min.js"
+            ],
             "es5BrowserSupport": true
           },
           "configurations": {

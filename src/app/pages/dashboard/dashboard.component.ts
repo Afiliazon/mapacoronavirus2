@@ -4,15 +4,17 @@ import {
   AfterViewInit,
   NgZone,
   ViewChild,
+  OnDestroy,
 } from '@angular/core';
 
-import { combineLatest } from 'rxjs';
+import { combineLatest, Subscription  } from 'rxjs';
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 
 import * as am4maps from "@amcharts/amcharts4/maps";
 import am4geodata_worldLow from "@amcharts/amcharts4-geodata/worldLow";
+
 
 import {
   GetdataService
@@ -25,6 +27,7 @@ import {
   isUndefined
 } from 'util';
 import { ModalDirective } from 'ngx-bootstrap/modal';
+import { NgcCookieConsentService } from 'ngx-cookieconsent';
 import { trigger, transition, animate, style, state } from '@angular/animations'
 
 //am4core.useTheme(am4themes_dataviz);
@@ -44,7 +47,14 @@ am4core.useTheme(am4themes_animated);
     ])
   ]
 })
-export class DashboardComponent implements OnInit, AfterViewInit {
+
+export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
+  private popupOpenSubscription: Subscription;
+  private popupCloseSubscription: Subscription;
+  private initializeSubscription: Subscription;
+  private statusChangeSubscription: Subscription;
+  private revokeChoiceSubscription: Subscription;
+  private noCookieLawSubscription: Subscription;
   @ViewChild(PerfectScrollbarComponent) public directiveScroll: PerfectScrollbarComponent;
   @ViewChild('autoShownModal', { static: false }) autoShownModal: ModalDirective;
   isModalShown = false;
@@ -52,6 +62,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   showModal(): void {
     this.modalStep = 1;
     this.isModalShown = true;
+  
   }
  
   hideModal(): void {
@@ -84,6 +95,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   private mapChart: am4maps.MapChart;
   private lineChart: am4charts.XYChart;
   private radarChart: am4charts.RadarChart;
+ 
   public isLoading: boolean = true;
   public isLoadingMap: boolean = true;
   public isLoadingCountries: boolean = true;
@@ -378,7 +390,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     }
     return data
   }
-  constructor(private zone: NgZone, private _getDataService: GetdataService) {
+  constructor(private zone: NgZone, private _getDataService: GetdataService, private ccService: NgcCookieConsentService) {
 
   }
 
@@ -401,6 +413,12 @@ export class DashboardComponent implements OnInit, AfterViewInit {
         this.radarChart.dispose();
       }
     });
+    this.popupOpenSubscription.unsubscribe();
+    this.popupCloseSubscription.unsubscribe();
+    this.initializeSubscription.unsubscribe();
+    this.statusChangeSubscription.unsubscribe();
+    this.revokeChoiceSubscription.unsubscribe();
+    this.noCookieLawSubscription.unsubscribe();
   }
 
 
@@ -445,6 +463,27 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
      });
     });
+    // subscribe to cookieconsent observables to react to main events
+    this.popupOpenSubscription = this.ccService.popupOpen$.subscribe(
+      () => {
+        // you can use this.ccService.getConfig() to do stuff...
+      });
+
+    this.popupCloseSubscription = this.ccService.popupClose$.subscribe(
+      () => {
+        // you can use this.ccService.getConfig() to do stuff...
+      });
+
+   
+
+    
+
+    this.revokeChoiceSubscription = this.ccService.revokeChoice$.subscribe(
+      () => {
+        // you can use this.ccService.getConfig() to do stuff...
+      });
+
+      
   }
 
   searchCountries(key) {

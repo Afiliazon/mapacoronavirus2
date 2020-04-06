@@ -24,11 +24,55 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AdsenseModule } from 'ng2-adsense';
+import {NgcCookieConsentModule, NgcCookieConsentConfig} from 'ngx-cookieconsent';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   };
 
+  const cookieConfig:NgcCookieConsentConfig = {
+    cookie: {
+      domain: 'mapacoronavirus.live' // or 'your.domain.com' // it is mandatory to set a domain, for cookies to work properly (see https://goo.gl/S2Hy2A)
+    },
+    palette: {
+      popup: {
+        background: '#000000',
+        text: '#ffffff',
+        link: '#ffffff'
+      },
+      button: {
+        background: '#21afdd',
+        text: '#ffffff',
+        border: 'transparent'
+      }
+    },
+    theme: 'edgeless',
+    type: 'opt-out',
+    layout: 'my-custom-layout',
+    layouts: {
+    "my-custom-layout": '{{messagelink}}{{compliance}}'
+  },
+  elements:{
+    messagelink: `
+    <span id="cookieconsent:desc" class="cc-message">{{message}} 
+      <a aria-label="learn more about cookies" tabindex="0" class="cc-link" href="{{cookiePolicyHref}}" target="_blank">{{cookiePolicyLink}}</a>, 
+      <a aria-label="learn more about our privacy policy" tabindex="1" class="cc-link" href="{{privacyPolicyHref}}" target="_blank">{{privacyPolicyLink}}</a>     
+    </span>
+    `,
+  },
+  content:{
+    message: 'Utilizamos cookies para asegurar que damos la mejor experiencia al usuario en nuestra web. Si sigues utilizando este sitio asumiremos que estás de acuerdo. ',
+    dismiss: 'Acepto',
+    deny: 'Quiero salir',
+    cookiePolicyLink: 'Politica de Cookies',
+    cookiePolicyHref: 'https://cookie.com',
 
+    privacyPolicyLink: 'Privacidad',
+    privacyPolicyHref: 'https://privacy.com',
+
+    tosLink: 'Terms of Service',
+    tosHref: 'https://tos.com',
+  }
+  };
 
 
 @NgModule({
@@ -43,6 +87,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AppRoutingModule,CommonModule,
     RouterModule,
     PerfectScrollbarModule,
+    NgcCookieConsentModule.forRoot(cookieConfig),
     ModalModule.forRoot(),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production, registrationStrategy: 'registerImmediately' }),
     TranslateModule.forRoot({
