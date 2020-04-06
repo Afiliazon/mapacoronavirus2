@@ -54,7 +54,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     }),
     // shown passing global defaults (optional)
     AdsenseModule.forRoot({
-      adClient: 'ca-pub-9611770290034128'
+      adClient: 'ca-pub-9611770290034128',
+      adSlot: 7749816445,
     }),
   ],
   providers:[{
