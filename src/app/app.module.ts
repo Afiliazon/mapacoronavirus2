@@ -67,7 +67,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     cookiePolicyHref: 'https://afiliazon.com/politica-de-cookies/',
 
     privacyPolicyLink: 'Privacidad',
-    privacyPolicyHref: 'https://privacy.https://afiliazon.com/politica-de-privacidad/',
+    privacyPolicyHref: 'https://afiliazon.com/politica-de-privacidad/',
 
     
   }
